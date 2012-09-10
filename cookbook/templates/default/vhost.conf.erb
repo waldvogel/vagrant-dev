@@ -3,10 +3,9 @@ User vagrant
 Group vagrant
 
 <VirtualHost *:80>
-  Servername cmf.lo
-  Serveralias 172.22.22.22
-  DocumentRoot /vagrant/web
-  <Directory "/vagrant/web">
+  Servername 172.99.99.99
+  DocumentRoot /vagrant
+  <Directory "/vagrant">
     AllowOverride All
   </Directory>
 </VirtualHost>

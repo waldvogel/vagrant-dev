@@ -17,7 +17,7 @@ Vagrant::Config.run do |config|
   # Boot with a GUI so you can see the screen. (Default is headless)
   # config.vm.boot_mode = :gui
 
-  config.vm.network :hostonly, "172.22.22.22"
+  config.vm.network :hostonly, "172.99.99.99"
   # whithout this symlinks can't be created on the shared folder
   config.vm.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/v-root", "1"]
 
