@@ -36,10 +36,16 @@ emacs23-nox
 git
 libapache2-mod-php5
 mysql-server
+postgresql
 php5-cli
 php5-curl
-php5-sqlite
 php5-intl
+php5-sqlite
+php5-mysql
+php5-pgsql
+php5-gd
+php5-xmlrpc
+php5-imagick
 sqlite3
 ).each { | pkg | package pkg }
 
