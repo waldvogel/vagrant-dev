@@ -3,3 +3,4 @@
 !.gitignore
 !Vagrantfile
 !/cookbook/
+!README.md
