@@ -55,7 +55,7 @@ Bring all boxes up:
 
 The hostmaster plugin manages the IP addresses via `/etc/hosts` (except on Windows). Therefore any of the boxes should be reachable through the **name** plus `.lo`. So for example:
 
-    <http://ruby.lo/>
+<http://ruby.lo/>
 
 ssh access works like this:
 
