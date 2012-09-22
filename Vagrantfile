@@ -1,34 +1,45 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-Vagrant::Config.run do |config|
-  # All Vagrant configuration is done here. The most common configuration
-  # options are documented and commented below. For a complete reference,
-  # please see the online documentation at vagrantup.com.
+require 'rbconfig'
+WINDOWS = (RbConfig::CONFIG['host_os'] =~ /mswin|mingw|cygwin/) ? true : false
 
-  # Every Vagrant virtual environment requires a box to build off of.
+# use hostmaster only if not on Windows
+require File.dirname(__FILE__) + "/hostmaster/hostmaster.rb" unless WINDOWS
+
+Vagrant::Config.run do |config|
+
+  # common settings
   config.vm.box = "precise32"
   config.vm.customize ["modifyvm", :id, "--memory", 768]
-
-  # The url from where the 'config.vm.box' box will be fetched if it
-  # doesn't already exist on the user's system.
   config.vm.box_url = "http://files.vagrantup.com/precise32.box"
-
-  # Boot with a GUI so you can see the screen. (Default is headless)
-  # config.vm.boot_mode = :gui
-
-  config.vm.network :hostonly, "172.99.99.99"
-  # whithout this symlinks can't be created on the shared folder
   config.vm.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/v-root", "1"]
+  config.vm.share_folder "v-root", "/vagrant", "." , :nfs => !WINDOWS
 
-  # chef solo configuration
-  config.vm.provision :chef_solo do |chef|
-    chef.cookbooks_path = "./"
-    # chef debug level, start vagrant like this to debug:
-    # $ CHEF_LOG_LEVEL=debug vagrant <provision or up>
-    chef.log_level = ENV['CHEF_LOG'] || "info"
-
-    # chef recipes
-    chef.add_recipe("cookbook")
+  # php box
+  box = "php"
+  config.vm.define :php do |config|
+    config.hosts.name = box + ".lo" unless WINDOWS
+    config.vm.network :hostonly, "172.90.90.90"
+    config.vm.provision :chef_solo do |chef|
+      chef.cookbooks_path = "cookbooks"
+      chef.log_level = ENV['CHEF_LOG'] || "info"
+      chef.add_recipe("common")
+      chef.add_recipe(box)
+    end
   end
+
+  # ruby box
+  box = "ruby"
+  config.vm.define :ruby do |config|
+    config.hosts.name = box + ".lo" unless WINDOWS
+    config.vm.network :hostonly, "172.90.90.91"
+    config.vm.provision :chef_solo do |chef|
+      chef.cookbooks_path = "cookbooks"
+      chef.log_level = ENV['CHEF_LOG'] || "info"
+      chef.add_recipe("common")
+      chef.add_recipe(box)
+    end
+  end
+  
 end

@@ -1,8 +1,31 @@
-# Vagrant PHP Development Box #
+# Vagrant Development Boxes (Multi VM) #
 
-Generic box to work on various smaller PHP projects that don't deserve their own setup.
+Base boxes to work on various smaller projects that don't deserve their own setup.
+Based on the latest official Vagrant Ubuntu version.
 
-The box is based on the latest official Vagrant Ubuntu version and will install:
+## Prerequisites: ##
+
+  - [Virtualbox](https://www.virtualbox.org/)
+  - [Vagrant](http://vagrantup.com)
+
+## Getting the repository ##
+
+    git clone git://github.com/waldvogel/vagrant-dev.git
+    cd vagrant-dev
+
+------------------------------------------------------------------------------------------------------
+
+## Boxes
+
+Currently the setup contains two configurations:
+
+### ruby
+
+- Ruby 1.9.3
+- Latest Ruby on Rails (installed with `gem install rails`)
+- Devel Libraries to setup [Locomotive CMS](http://www.locomotivecms.com/)
+
+### php
 
 - Apache2 with mod php
 - PHP5 with the following libraries:
@@ -12,35 +35,49 @@ The box is based on the latest official Vagrant Ubuntu version and will install:
 - mysql server and client
 - postgresql
 
-## Prerequisites: ##
+------------------------------------------------------------------------------------------------------
 
-  - [Virtualbox](https://www.virtualbox.org/)
-  - [Vagrant](http://vagrantup.com)
+## Handling
 
-## Getting the repository ##
+**Important is to remember that the vagrant commands operate on all the boxes if you don't specify one**
 
-    git clone git://github.com/waldvogel/vagrant-php-dev.git
-    cd vagrant-php-dev
+### Starting
 
-## Accessing the box ##
+Bring the `ruby` box up:
 
-    vagrant ssh
+    vagrant up ruby
     
- The box has the IP address 172.99.99.99
- You can setup apache and access it from your host.
+Bring all boxes up:
 
-## Suspending/Resuming ##
+    vagrant up
 
-    vagrant suspend
+### Accessing ##
+
+The hostmaster plugin manages the IP addresses via `/etc/hosts` (except on Windows). Therefore any of the boxes should be reachable through the **name** plus `.lo`. So for example:
+
+    <http://ruby.lo/>
+
+ssh access works like this:
+
+    vagrant ssh <boxname>
+    
+
+### Suspending/Resuming ##
+
+    vagrant suspend <boxname>
 
 After that, to work with it again:
 
-    vagrant resume
+    vagrant resume <boxname>
 
-## Destroying ##
+### Destroying ##
 
-To get rid of the box totally:
+To get rid all the boxes:
 
     vagrant destroy 
 
 To force it (quicker) add `-f`
+
+To destroy only `ruby`:
+
+    vagrant destroy ruby -f

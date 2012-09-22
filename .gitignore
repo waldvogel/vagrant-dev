@@ -2,5 +2,6 @@
 /*/
 !.gitignore
 !Vagrantfile
-!/cookbook/
+!/cookbooks/
+!/hostmaster/
 !README.md
