@@ -1,8 +1,5 @@
 # install the software we need
 %w(
-curl
-vim
-git
 sqlite3
 mongodb
 build-essential
@@ -11,6 +8,8 @@ libxml2-dev
 libxslt1-dev
 libmagickcore-dev
 libmagickwand-dev
+libpq-dev
+nodejs
 ).each { | pkg | package pkg }
 
 execute "install rails" do

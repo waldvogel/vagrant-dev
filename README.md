@@ -13,8 +13,6 @@ Based on the latest official Vagrant Ubuntu version.
     git clone git://github.com/waldvogel/vagrant-dev.git
     cd vagrant-dev
 
-------------------------------------------------------------------------------------------------------
-
 ## Boxes
 
 Currently the setup contains two configurations:
@@ -23,7 +21,10 @@ Currently the setup contains two configurations:
 
 - Ruby 1.9.3
 - Latest Ruby on Rails (installed with `gem install rails`)
-- Devel Libraries to setup [Locomotive CMS](http://www.locomotivecms.com/)
+- Devel Libraries to setup:
+  * [Locomotive CMS](http://www.locomotivecms.com/)
+  * [tentd](https://github.com/tent/tentd/)
+  * [tentd-admin](https://github.com/tent/tentd-admin/)
 
 ### php
 
@@ -34,8 +35,6 @@ Currently the setup contains two configurations:
 - sqlite CLI
 - mysql server and client
 - postgresql
-
-------------------------------------------------------------------------------------------------------
 
 ## Handling
 

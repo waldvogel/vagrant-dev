@@ -1,8 +1,5 @@
 %w(
 openjdk-6-jre-headless
-curl
-vim
-git
 libapache2-mod-php5
 mysql-server
 postgresql

@@ -25,3 +25,12 @@ execute "apt-get-update-periodic" do
     File.mtime('/var/lib/apt/periodic/update-success-stamp') < Time.now - 86400
   end
 end
+
+# install common packages for all vms
+%w(
+curl
+vim
+zile
+git
+tmux
+).each { | pkg | package pkg }
