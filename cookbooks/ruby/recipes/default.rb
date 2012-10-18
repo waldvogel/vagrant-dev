@@ -14,5 +14,10 @@ nodejs
 
 execute "install rails" do
   not_if "gem list --local | grep rails"
-  command "gem install rails"
+  command "gem install rails --no-ri --no-rdoc"
+end
+
+execute "install pry" do
+  not_if "gem list --local | grep pry"
+  command "gem install pry --no-ri --no-rdoc"
 end

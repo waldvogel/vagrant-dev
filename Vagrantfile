@@ -17,8 +17,8 @@ Vagrant::Config.run do |config|
   config.vm.share_folder "v-root", "/vagrant", "." , :nfs => !WINDOWS
 
   # php box
-  box = "php"
   config.vm.define :php do |config|
+    box = "php"
     config.hosts.name = box + ".lo" unless WINDOWS
     config.vm.network :hostonly, "172.90.90.90"
     config.vm.provision :chef_solo do |chef|
@@ -30,8 +30,8 @@ Vagrant::Config.run do |config|
   end
 
   # ruby box
-  box = "ruby"
   config.vm.define :ruby do |config|
+    box = "ruby"
     config.hosts.name = box + ".lo" unless WINDOWS
     config.vm.network :hostonly, "172.90.90.91"
     config.vm.provision :chef_solo do |chef|
